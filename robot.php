@@ -8,7 +8,7 @@
 
 include 'func.class.php';
 
-define ('TOKEN','606304194:AAGzXe_KxIl5lt5XEVmoo2ZdmnoBDiIHudU');
+define ('TOKEN','<TOKEN BOT TELEGRAM>');
 
 $tlg=new Tlg (TOKEN);
 
