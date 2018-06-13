@@ -2,5 +2,7 @@
 Um bot simples para formatação de textos em Markdown no Telegram.
 
 # Como Configurar:
-Hospede o código no seu servidor e acesse o arquivo para definir a URL de webhook.\n
-Ex: https://link.com/robot.php
+
+Defina no arquivo robot.php o TOKEN do seu bot.
+Hospede o código no seu servidor e acesse o arquivo para definir a URL de webhook.
+Ex: _https://link.com/robot.php_
