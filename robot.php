@@ -9,7 +9,7 @@
 
 include 'func.class.php';
 
-define ('TOKEN','519568936:AAGj9duEzBpGeAiHvlcyD1JXkfvnjJHiBE0');
+define ('TOKEN','#####');
 
 $tlg=new Tlg (TOKEN);
 
