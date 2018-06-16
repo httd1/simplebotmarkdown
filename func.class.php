@@ -11,8 +11,10 @@
 class Tlg {
 
 	
-	function __construct ($token){
+function __construct ($token){
+	
 		$this->tokenBot=$token;
+		
 		}
 		
 public function chat_id (){
@@ -40,6 +42,28 @@ public function text (){
 	
 	$texto=$this->data ()->message->text;
 	return $texto;
+	
+	}
+	
+public function lang ($lang=''){
+	
+	if ($lang != ''){
+		return $lang;
+		}
+		
+		$lang=@strtolower ($this->data ()->message->from->language_code);
+		
+		if (isset ($lang)){
+			
+			list ($language)=explode ('-', $lang);
+			return $language;
+			
+			}else {
+				
+				// Linguagem padrão se não existir "language_code"
+				return 'pt';
+				
+				}
 	
 	}
 	

@@ -9,7 +9,7 @@
 
 include 'func.class.php';
 
-define ('TOKEN','<TOKEN_TELEGRAM>');
+define ('TOKEN','519568936:AAGj9duEzBpGeAiHvlcyD1JXkfvnjJHiBE0');
 
 $tlg=new Tlg (TOKEN);
 
@@ -37,6 +37,10 @@ $texto=$tlg->text ();
 $username=$tlg->username ();
 $nome=$tlg->name ();
 $chatID=$tlg->chat_id ();
+$pref=($tlg->lang () != 'en' && $tlg->lang () != 'es' && $tlg->lang () != 'pt') ? 'en' : $tlg->lang ();
+
+// Textos em várias línguas
+include 'idiomas.php';
 
 switch ($texto):
 
@@ -44,20 +48,7 @@ case '/start':
 
 $tlg->APITelegram ('sendMessage', [
 'chat_id' => $chatID,
-'text' => "Olá <b>{$nome}</b> !
-
-✍ Formate suas mensagens em Links, Código, Itálico, Negrito...
-
-[Texto do Link](http://seulink.com)
-
-`Marcação de Código`
-
-```Marcação Código em Bloco```
-
-_Marcação em Itálico_
-
-*Marcação em Negrito*
-",
+'text' => $lang [$pref]['start'],
 'parse_mode' => 'html',
 'disable_web_page_preview' => 'true'
 ]);
@@ -68,7 +59,7 @@ case '/help':
 
 $tlg->APITelegram ('sendMessage',[
 'chat_id' => $chatID,
-'text' => 'Texto de ajuda!'
+'text' => $lang [$pref]['help']
 ]);
 
 break;
@@ -87,7 +78,7 @@ $send=$tlg->APITelegram ('sendMessage', [
 		
 		$tlg->APITelegram ('sendMessage', [
 		'chat_id' => $chatID,
-		'text' => 'Há um erro na formatação da sua mensagem'
+		'text' => $lang [$pref]['erro']
 		]);
 		
 		}
