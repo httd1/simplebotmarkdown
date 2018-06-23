@@ -19,7 +19,7 @@ function __construct ($token){
 		
 public function chat_id (){
 	
-	$chatID=$this->data ()->message->chat->id;
+	$chatID=@$this->data ()->message->chat->id;
 	return $chatID;
 	
 	}
@@ -33,14 +33,14 @@ public function username (){
 	
 public function name (){
 	
-	$nome=$this->data ()->message->from->first_name;
+	$nome=@$this->data ()->message->from->first_name;
 	return $nome;
 	
 	}
 	
 public function text (){
 	
-	$texto=$this->data ()->message->text;
+	$texto=@$this->data ()->message->text;
 	return $texto;
 	
 	}
@@ -65,6 +65,13 @@ public function lang ($lang=''){
 				
 				}
 	
+	}
+	
+public function type (){
+	
+	$chatType=@$this->data ()->message->chat->type;
+	
+		return $chatType;
 	}
 	
 public function data (){
