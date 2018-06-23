@@ -1,4 +1,5 @@
 <?php
+
 /*
 ** @httd1 - t.me/httd1 (Telegram)
 ** https://github.com/httd1
@@ -9,7 +10,8 @@
 
 include 'func.class.php';
 
-define ('TOKEN','#####');
+define ('TOKEN','<TOKEN_BOT>');
+define ('USER_BOT','@robot');
 
 $tlg=new Tlg (TOKEN);
 
@@ -23,6 +25,7 @@ $tlg=new Tlg (TOKEN);
 		]);
 		
 		if ($ret->ok){
+			
 			echo 'Ok,url de Webhook definida para '.$url;
 			}else {
 				echo 'Ops! Houve um erro ao definir url de Webhook.
@@ -33,14 +36,40 @@ ERRO: '.$ret->error_code.' DESCRIPTION: '.$ret->description;
 		
 		}
 		
-$texto=$tlg->text ();
-$username=$tlg->username ();
-$nome=$tlg->name ();
-$chatID=$tlg->chat_id ();
-$pref=($tlg->lang () != 'en' && $tlg->lang () != 'es' && $tlg->lang () != 'pt') ? 'en' : $tlg->lang ();
+$texto = $tlg->text ();
+$username = $tlg->username ();
+$nome = $tlg->name ();
+$chatID = $tlg->chat_id ();
+$pref = ($tlg->lang () != 'en' && $tlg->lang () != 'es' && $tlg->lang () != 'pt') ? 'en' : $tlg->lang ();
 
 // Textos em várias línguas
 include 'idiomas.php';
+
+	// Resposta Inline
+	
+	if (isset ($tlg->data ()->inline_query)){
+
+	$build = [[
+	'type' => 'article',
+	'id' => '0',
+	'title' => USER_BOT,
+	'description' => $tlg->data ()->inline_query->query,
+	'input_message_content' => [
+	'message_text' => $tlg->data ()->inline_query->query,
+	'parse_mode' => 'markdown'
+	]
+	]];
+
+	$query = [
+	'inline_query_id' =>  $tlg->data ()->inline_query->id,
+	'results' => json_encode($build)
+	];
+	
+	$tlg->APITelegram ('answerInlineQuery', $query);
+		
+			exit;
+		}
+		
 
 switch ($texto):
 
